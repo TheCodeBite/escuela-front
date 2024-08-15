@@ -1,0 +1,75 @@
+<div class="container student-list">
+    <button (click)="inicializarFomularioAgregar(false,null)" data-toggle="modal" data-target="#grupoModal" class="floating-btn">
+        <i class="fas fa-plus"></i>
+    </button>
+
+    <h2 class="text-center mb-5">Lista de Alumnos</h2>
+
+    <!-- Tarjeta de Alumno 1 -->
+    <div class="student-card" *ngFor="let alumno of alumnos">
+        <div class="row" >
+            <div class="col-md-8 student-info">
+                <h5> {{alumno.nombre}} </h5>
+                <p>Apellido: {{alumno.apellidos}} </p>
+                <p>Edad: {{alumno.edad}} años</p>
+            </div>
+            <div class="col-md-4 text-right">
+                <span class="badge" [ngClass]="getColor(alumno.calificacion)">Calificación: {{alumno.calificacion}} </span>
+                <div class="action-buttons mt-2">
+                    <button data-toggle="modal" data-target="#grupoModal" (click)="abrirModalActualizar(alumno)" class="btn btn-sm btn-warning">Editar</button>
+                    <button (click)="eliminarAlumno(alumno)" class="btn btn-sm btn-danger">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- Modal agregar grupo -->
+<div class="modal fade" id="grupoModal" tabindex="-1" aria-labelledby="grupoModalLabel" aria-hidden="true"
+data-backdrop="static" data-keyboard="false">
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-header border-0">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <h2>{{update ? "Editar" : "Crear"}}  Alumno</h2>
+                <form [formGroup]="formularioCrearAlumno">
+                    <!-- Campo Nombre -->
+                    <div formGroupName="alumno">
+                        <div class="form-group">
+                            <label for="nombre">Nombre</label>
+                            <input formControlName="nombre" type="text" class="form-control" id="nombre" placeholder="Ingrese el nombre" required>
+                        </div>
+            
+                        <!-- Campo Apellido -->
+                        <div class="form-group">
+                            <label for="apellido">Apellido</label>
+                            <input formControlName="apellidos" type="text" class="form-control" id="apellido" placeholder="Ingrese el apellido" required>
+                        </div>
+            
+                        <!-- Campo Edad -->
+                        <div class="form-group">
+                            <label for="edad">Edad</label>
+                            <input formControlName="edad" type="number" class="form-control" id="edad" placeholder="Ingrese la edad" min="1" max="100" required>
+                        </div>
+            
+                        <!-- Campo Calificación -->
+                        <div class="form-group">
+                            <label for="calificacion">Calificación</label>
+                            <input formControlName="calificacion" type="number" class="form-control" id="calificacion" placeholder="Ingrese la calificación" min="0" max="10" step="0.1" required>
+                        </div>
+                    </div>
+        
+                    <!-- Botón Enviar -->
+                </form>
+                <button (click)="update ? actualizarAlumno() : crearAlumno()" class="btn btn-primary btn-block">Guardar</button>
+
+        </div>
+    </div>
+</div>
+</div>
+
+</div>

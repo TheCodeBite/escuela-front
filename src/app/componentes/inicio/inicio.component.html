@@ -1,0 +1,54 @@
+<div class="container text-center">
+    <h1 class="mb-5">Grupos de la Escuela</h1>
+    <div class="row justify-content-center">
+        <!-- Tarjeta 1 -->
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4" *ngFor="let grupo of grupos" style="cursor: pointer;" (click)="verAlumnos(grupo)">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Grado {{grupo.grado}} - Grupo {{grupo.grupo}} </h5>
+                    <p class="card-text">Matutino</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button data-toggle="modal" data-target="#grupoModal" class="floating-btn">
+    <i class="fas fa-plus"></i>
+</button>
+
+
+
+
+<!-- Modal agregar grupo -->
+<div class="modal fade" id="grupoModal" tabindex="-1" aria-labelledby="grupoModalLabel" aria-hidden="true"
+    data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <h5 class="modal-title" id="grupoModalLabel">Agregar Nuevo Grupo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="fomularioAgregarGrupo">
+                    
+                    <div class="form-group">
+                        <label for="grado">Grado</label>
+                        <input formControlName="grado" type="number" class="form-control" id="grado" placeholder="Ingrese el grado" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="grupo">Grupo</label>
+                        <input formControlName="grupo" type="text" class="form-control" id="grupo" placeholder="Ingrese el grupo" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button (click)="crearGrupo()" type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
