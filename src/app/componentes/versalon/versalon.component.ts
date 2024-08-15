@@ -96,8 +96,7 @@ export class VersalonComponent {
 
   actualizarAlumno() {    
     this.api.actualizarAlumno(this.formularioCrearAlumno.value.alumno).subscribe(response => {
-      console.log(response);
-      this.obtenerAlumnos();
+      window.location.reload();
     }, error => {
       alert((error.error.mensaje == null || error.error.mensaje == undefined) ? error.error : error.error.mensaje )
     })
